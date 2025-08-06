@@ -19,6 +19,11 @@ public class Student {
     @JoinColumn(name = "address_id")
     private Address address;
 
+
+    @ManyToOne
+    @JoinColumn(name = "department_id")
+    private Department department;
+
     public Student() {
     }
 
@@ -55,6 +60,14 @@ public class Student {
     public void setAddress(Address address) {
         this.address = address;
         address.setStudent(this);
+    }
+
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
     }
 
 }
