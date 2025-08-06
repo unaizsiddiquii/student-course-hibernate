@@ -2,6 +2,7 @@ package com.unaiz.entity;
 
 import jakarta.persistence.*;
 
+
 @Entity
 @Table(name = "students")
 public class Student {
@@ -13,6 +14,10 @@ public class Student {
     private String name;
 
     private String email;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "address_id")
+    private Address address;
 
     public Student() {
     }
@@ -42,4 +47,14 @@ public class Student {
     public void setEmail(String email) {
         this.email = email;
     }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+        address.setStudent(this);
+    }
+
 }

@@ -1,6 +1,7 @@
 package com.unaiz;
 
 
+import com.unaiz.entity.Address;
 import com.unaiz.entity.Student;
 import com.unaiz.util.HibernateUtil;
 import org.hibernate.Session;
@@ -10,19 +11,12 @@ public class Main {
 
         Session session = HibernateUtil.getSessionFactory().openSession();
         try {
-            // Step 3: Create Student
-            Student student = new Student("Unaiz", "unaiz@example.com");
-
-            // Step 4: Begin Transaction
+            Address address = new Address("Mumbai", "MH", "400001");
+            Student student = new Student("Khushi Siddiqui", "khuhsi0726@gmail.com");
+            student.setAddress(address);
             session.beginTransaction();
-
-            // Step 5: Save the object
             session.persist(student);
-
-            // Step 6: Commit
             session.getTransaction().commit();
-
-            System.out.println("✅ Student Saved: " + student.getId());
 
         } catch (Exception e) {
             if (session.getTransaction() != null) session.getTransaction().rollback();
