@@ -2,6 +2,9 @@ package com.unaiz.entity;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 @Entity
 @Table(name = "students")
@@ -23,6 +26,14 @@ public class Student {
     @ManyToOne
     @JoinColumn(name = "department_id")
     private Department department;
+
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinTable(
+            name = "student_course",
+            joinColumns = @JoinColumn(name = "student_id"),
+            inverseJoinColumns = @JoinColumn(name = "course_id")
+    )
+    private List<Course> courses = new ArrayList<>();
 
     public Student() {
     }
@@ -68,6 +79,16 @@ public class Student {
 
     public void setDepartment(Department department) {
         this.department = department;
+    }
+
+    public List<Course> getCourses() {
+        return courses;
+    }
+
+    public void addCourse(Course course) {
+        courses.add(course);
+        course.getStudents().add(this);
+
     }
 
 }

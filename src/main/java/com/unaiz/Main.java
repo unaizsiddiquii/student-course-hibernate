@@ -2,7 +2,7 @@ package com.unaiz;
 
 
 import com.unaiz.entity.Address;
-import com.unaiz.entity.Department;
+import com.unaiz.entity.Course;
 import com.unaiz.entity.Student;
 import com.unaiz.util.HibernateUtil;
 import org.hibernate.Session;
@@ -12,24 +12,17 @@ public class Main {
 
         Session session = HibernateUtil.getSessionFactory().openSession();
         try {
-//            Address address = new Address("Mumbai", "MH", "400001");
-//            Student student = new Student("Khushi Siddiqui", "khuhsi0726@gmail.com");
-//            student.setAddress(address);
-//            session.beginTransaction();
-//            session.persist(student);
-//            session.getTransaction().commit();
-            Department dept = new Department("Computer Science");
+            Course java = new Course("Java", 60);
+            Course python = new Course("Python", 40);
 
-            Student s1 = new Student("Raj", "raj@cs.com");
-            Student s2 = new Student("Simran", "simran@cs.com");
-
-            dept.addStudent(s1);
-            dept.addStudent(s2);
+            Student student = new Student("Kunal", "kunal@code.com");
+            student.addCourse(java);
+            student.addCourse(python);
 
             session.beginTransaction();
-            session.persist(dept);
+            session.persist(student);
             session.getTransaction().commit();
-
+            System.out.println("✅ Student with courses saved");
         } catch (Exception e) {
             if (session.getTransaction() != null) session.getTransaction().rollback();
             e.printStackTrace();

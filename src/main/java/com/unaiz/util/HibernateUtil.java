@@ -1,6 +1,7 @@
 package com.unaiz.util;
 
 import com.unaiz.entity.Address;
+import com.unaiz.entity.Course;
 import com.unaiz.entity.Department;
 import com.unaiz.entity.Student;
 import org.hibernate.SessionFactory;
@@ -16,6 +17,7 @@ public class HibernateUtil {
                     .addAnnotatedClass(Student.class)
                     .addAnnotatedClass(Address.class)
                     .addAnnotatedClass(Department.class)
+                    .addAnnotatedClass(Course.class)
                     .buildSessionFactory();
         } catch (Exception ex) {
             System.err.println("SessionFactory creation failed." + ex);
