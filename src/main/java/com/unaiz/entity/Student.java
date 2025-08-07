@@ -27,7 +27,7 @@ public class Student {
     @JoinColumn(name = "department_id")
     private Department department;
 
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
     @JoinTable(
             name = "student_course",
             joinColumns = @JoinColumn(name = "student_id"),
@@ -91,4 +91,11 @@ public class Student {
 
     }
 
+    @Override
+    public String toString() {
+        return "Student{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'';
+    }
 }

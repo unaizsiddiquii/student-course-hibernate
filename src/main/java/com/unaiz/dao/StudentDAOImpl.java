@@ -33,7 +33,8 @@ public class StudentDAOImpl implements StudentDAO {
     @Override
     public List<Student> getAllStudents() {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            return session.createQuery("from student", Student.class).list();
+            return session.createQuery("from Student", Student.class).list();
+
         }
     }
 
